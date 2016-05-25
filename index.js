@@ -44,7 +44,7 @@ module.exports.pitch = function(request) {
 			var workerFile = entries[0].files[0];
 			var constructor;
 			if(query.shared) {
-				constructor = "new SharedWorker(__webpack_public_path__ + " + JSON.stringify(workerFile) + ")";
+				constructor = "new SharedWorker(__webpack_public_path__ + " + JSON.stringify(workerFile) + ((query.workerName)? ","+query.workerName : "" )+ ")";
 				if(query.inline) {
 					constructor = "require(" + JSON.stringify("!!" + path.join(__dirname, "createInlineSharedWorker.js")) + ")(" +
 					JSON.stringify(compilation.assets[workerFile].source()) + ", __webpack_public_path__ + " + JSON.stringify(workerFile) + ")";
